@@ -1,9 +1,9 @@
 var path = require('path');
 
-//var DATABASE_URL = 'mysql://root:adclick@192.168.50.223:3306/quiz';
-//var url = DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
+var DATABASE_URL = 'mysql://root:adclick@192.168.50.223:3306/quiz';
+var url = DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 
-var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
+//var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 var DB_name = (url[6]||null);
 var user    = (url[2]||null);
 var pwd     = (url[3]||null);
@@ -29,10 +29,11 @@ var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
 exports.Quiz = Quiz;
 
 //Crear e inicializar la BD
-sequelize.sync().success(function(){
-    Quiz.count().success(function(count){
+sequelize.sync().then(function(){
+    Quiz.count().then(function(count){
        if(0 === count){
-          Quiz.create({pregunta:'Capital de Italia', respuesta:'Roma'}).success(function(){console.log('Base de datos inicializada.')}); 
+          Quiz.create({pregunta:'Capital de Portugal', respuesta:'Lisboa'});
+          Quiz.create({pregunta:'Capital de Italia', respuesta:'Roma'}).then(function(){console.log('Base de datos inicializada.')}); 
        }
     });
 });
