@@ -8,11 +8,14 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz' });
 });
 
+//Autoload de comnados con :quizId
+router.param('quizId', quizControllers.load); //autoload :quizId
+
+
+//Definicion de rutas de /quizes
 router.get('/quizes',                     quizControllers.index);
 router.get('/quizes/:quizId(\\d+)',       quizControllers.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizControllers.answer);
-//router.get('/quizes/question',  quizControllers.question);
-//router.get('/quizes/answer',    quizControllers.answer);
 router.get('/author',		          authorControllers.author);
 
 module.exports = router;
