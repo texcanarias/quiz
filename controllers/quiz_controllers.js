@@ -17,7 +17,13 @@ exports.load = function(req, res, next, quizId){
 
 
 exports.index = function(req, res){
-  models.Quiz.findAll().then(
+  var Filtro = "%";
+  if(req.query.search){
+    Filtro = "%"+req.query.search+"%";
+  }
+  Filtro = Filtro.replace(/\s/g,"%");
+
+  models.Quiz.findAll({where:["pregunta like ?",Filtro]}).then(
    function(quizes){
      res.render('quizes/index.ejs', {quizes: quizes});
     }
