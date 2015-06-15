@@ -5,7 +5,7 @@ var authorControllers = require('../controllers/author_controllers');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Quiz' });
+  res.render('index', { title: 'Quiz', errors: [] });
 });
 
 //Autoload de comnados con :quizId
@@ -15,7 +15,9 @@ router.param('quizId', quizControllers.load); //autoload :quizId
 //Definicion de rutas de /quizes
 router.get('/quizes',                     quizControllers.index);
 router.get('/quizes/:quizId(\\d+)',       quizControllers.show);
-router.get('/quizes/:quizId(\\d+)/answer', quizControllers.answer);
+router.get('/quizes/:quizId(\\d+)/answer',quizControllers.answer);
+router.get('/quizes/new',	          quizControllers.new);
+router.post('/quizes/create',              quizControllers.create);		
 router.get('/author',		          authorControllers.author);
 
 module.exports = router;
