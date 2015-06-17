@@ -3,12 +3,12 @@
 <label for="resp" class="rem">Respuesta:</label>
 <input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>" />
 <label for="tema" class="rem">Tema:</label>
- <select name="tema" id="tema">
-  <option value="otro" selected>Otro</option>
-  <option value="humanidades">Humanidades</option>
-  <option value="ocio">Ocio</option>
-  <option value="ciencia">Ciencia</option>
-  <option value="tecnologia">Tecnología</option>
+ <select name="quiz[tema]" id="tema">
+  <option value="1" <%= selected[1] %>>Otro</option>
+  <option value="2" <%= selected[2] %>>Humanidades</option>
+  <option value="3" <%= selected[3] %>>Ocio</option>
+  <option value="4" <%= selected[4] %>>Ciencia</option>
+  <option value="5" <%= selected[5] %>>Tecnología</option>
 </select>
 <a href="/quizes">
   <button type="button">Cancelar</button>

@@ -51,7 +51,7 @@ exports.answer = function(req, res){
 exports.new = function(req, res){
   //Crear objeto quiz
   var quiz = models.Quiz.build(
-    {pregunta: "Pregunta", respuesta: "Respuesta"}
+    {pregunta: "Pregunta", respuesta: "Respuesta", tema: 1}
   );
   res.render('quizes/new',{quiz: quiz, errors: []});
 };
@@ -68,7 +68,7 @@ exports.create = function(req, res){
       }
       else{
         quiz
-        .save({fields:["pregunta", "respuesta"]})
+        .save({fields:["pregunta", "respuesta", "tema"]})
 	.then(function(){ res.redirect("/quizes")})    
       }
   });
@@ -76,12 +76,16 @@ exports.create = function(req, res){
 
 exports.edit = function(req, res){
   var quiz = req.quiz;
-  res.render('quizes/edit', {quiz: quiz, errors:[]});
+  var selected = {1:"",2:"",3:"",4:"",5:""};
+  selected[quiz.tema] = "selected";
+  console.log(selected);
+  res.render('quizes/edit', {quiz: quiz, selected: selected, errors:[]});
 };
 
 exports.update = function(req, res){
   req.quiz.pregunta = req.body.quiz.pregunta;
   req.quiz.respuesta = req.body.quiz.respuesta;
+  req.quiz.tema = req.body.quiz.tema;
   
   req.quiz
   .validate()
@@ -92,7 +96,7 @@ exports.update = function(req, res){
       }
       else{
         req.quiz
-        .save({fields:["pregunta", "respuesta"]})
+        .save({fields:["pregunta", "respuesta", "tema"]})
 	.then(function(){
 	  res.redirect("/quizes");
         })    
