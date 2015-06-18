@@ -1,3 +1,3 @@
 exports.author = function(req, res){
-    res.render('author/author', {});
+    res.render('author/author', {errors: []});
 };
