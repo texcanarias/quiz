@@ -50,10 +50,11 @@ exports.answer = function(req, res){
 
 exports.new = function(req, res){
   //Crear objeto quiz
+  var selected = {1:"",2:"",3:"",4:"",5:""};
   var quiz = models.Quiz.build(
     {pregunta: "Pregunta", respuesta: "Respuesta", tema: 1}
   );
-  res.render('quizes/new',{quiz: quiz, errors: []});
+  res.render('quizes/new',{quiz: quiz, selected: selected, errors: []});
 };
 
 exports.create = function(req, res){
