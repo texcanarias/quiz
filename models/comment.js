@@ -2,11 +2,9 @@
    return sequelize.define(
      'Comment',
      {
-       {
-	 texto: {
-	   type: DataTypes.STRING,
-	   validate: { notEmpty: {msg: "--> Falta comentario"}}
-	}
+	texto: {
+	type: DataTypes.STRING,
+	validate: { notEmpty: {msg: "--> Falta comentario"}}
       }
     }
   );

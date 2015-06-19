@@ -1,9 +1,9 @@
 var path = require('path');
 
-//var DATABASE_URL = 'mysql://root:adclick@192.168.50.223:3306/quiz';
-//var url = DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
+var DATABASE_URL = 'mysql://root:adclick@192.168.50.223:3306/quiz';
+var url = DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 
-var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
+//var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 var DB_name = (url[6]||null);
 var user    = (url[2]||null);
 var pwd     = (url[3]||null);
