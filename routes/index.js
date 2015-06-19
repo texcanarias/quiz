@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
 var quizControllers = require('../controllers/quiz_controllers');
 var commentControllers = require('../controllers/comment_controllers');
 var authorControllers = require('../controllers/author_controllers');
+var sessionControllers = require('../controllers/session_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -12,6 +14,11 @@ router.get('/', function(req, res) {
 //Autoload de comnados con :quizId
 router.param('quizId', quizControllers.load); //autoload :quizId
 
+
+//Definicio de las rutas de sesion
+router.get('/login', sessionControllers.new); //Formulario de login
+router.post('/login', sessionControllers.create); //crear sesion
+router.get('/logout', sessionControllers.destroy); //destruir sesion (deberia ser delete)
 
 //Definicion de rutas de /quizes
 router.get('/quizes',                     quizControllers.index);
