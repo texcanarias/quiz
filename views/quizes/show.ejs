@@ -14,5 +14,12 @@
   </strong>
 </p>
 <%for(index in quiz.Comments) {%>
-  <p>- <%=quiz.Comments[index].texto%></p>
+  <%if if(quiz.Comments[index].publicado || session.user){%>
+    <p>- <%=quiz.Comments[index].texto%></p>
+      <%if if(!quiz.Comments[index].publicado && session.user){%>
+	<a href="/quizes/<%=quiz.id%>/comments/<%=quiz.Comments[index].id%>/publish">
+	  <button>Publicar</button>
+	</a>
+      <%}%>
+  <%}%>
 <%}%>
