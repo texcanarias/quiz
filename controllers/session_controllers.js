@@ -11,7 +11,7 @@ exports.loginRequired = function(req, res, next){
 exports.new = function(req, res){
   var errors = req.session.errors || {};
   req.session.errors = {};
-  res.render('session/new', {errors: errors});
+  res.render('sessions/new', {errors: errors});
 };
 
 //post - Crear la sesion
@@ -19,18 +19,21 @@ exports.create = function(req, res){
   var login = req.body.login;
   var password = req.body.password;
   
-  var userController = require('./user_controller');
-  //Si hay error retornamos mensajes de error de la sesion
-  if(error){
-    req.session.errors = [{"message:'Se ha producido un error: "+error}];
-    res.redirect("/login");
-    return;
-  }
+  var userController = require('./user_controllers');
+  userController.autenticar(login, password, function(error, user){
+    //Si hay error retornamos mensajes de error de la sesion
+    if(error){
+      req.session.errors = [{"message": "Se ha producido un error: "+error}];
+      res.redirect("/login");
+      return;
+    }
   
-  //Crear req.session.user y guardar is y username
-  //La sesion sedefine por la existencia de req.session.user
-  req.session.user = {id:user.id, username:user.username};
-  res.redirect(req.session.redir.toString());
+    //Crear req.session.user y guardar is y username
+    //La sesion sedefine por la existencia de req.session.user
+    req.session.user = {id:user.id, username:user.username};
+    console.log(req.session);
+    res.redirect(req.session.redir.toString());
+  });
 };
 
 //delete - Destruir sesion

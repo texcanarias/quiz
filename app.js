@@ -27,8 +27,16 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Helpers dinamicos
-apps.use(function(req, res, next){
-  if(!req.path.match(/\/login|\/logout/)){
+app.use(function(req, res, next){
+  console.log("req.session.redir es "+req.session.redir);
+  console.log("req.path es "+req.path);
+  if(req.path.match(/\/logout/)){
+    console.log("logout hace match");
+  }else{
+    console.log("logout NO hace match");
+  }
+  
+  if(!(req.path.match(/\/login/) || req.path.match(/\/logout/))){
       req.session.redir = req.path;
   }
   

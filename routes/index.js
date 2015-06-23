@@ -4,7 +4,7 @@ var router = express.Router();
 var quizControllers = require('../controllers/quiz_controllers');
 var commentControllers = require('../controllers/comment_controllers');
 var authorControllers = require('../controllers/author_controllers');
-var sessionControllers = require('../controllers/session_controller');
+var sessionControllers = require('../controllers/session_controllers');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 
 //Autoload de comnados con :quizId
 router.param('quizId', 		quizControllers.load); //autoload :quizId
-router.param('commentId'	commentControllers.load); //autoload :commentId
+router.param('commentId',	commentControllers.load); //autoload :commentId
 
 
 //Definicio de las rutas de sesion
