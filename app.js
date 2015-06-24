@@ -22,22 +22,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser('Quiz 2015'));
-app.use(express.session({cookie: {maxAge: 120000}}));//tiempo de expiración de la sesión
 app.use(session());
+//app.use(express.session({cookie: {maxAge: 120000}}));//tiempo de expiración de la sesión
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 //Helpers dinamicos
 app.use(function(req, res, next){
-  console.log("req.session.redir es "+req.session.redir);
-  console.log("req.path es "+req.path);
-  if(req.path.match(/\/logout/)){
-    console.log("logout hace match");
-  }else{
-    console.log("logout NO hace match");
-  }
-  
   if(!(req.path.match(/\/login/) || req.path.match(/\/logout/))){
+      if(!req.path){
+	req.path = "/";
+      }
       req.session.redir = req.path;
   }
   
